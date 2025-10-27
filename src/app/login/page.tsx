@@ -158,7 +158,7 @@ const Login = () => {
                     placeholder="Email"
                     onChange={(event) => {
                       setUserEmail(event.target.value);
-                      setIsValidEmail(emailRegex.test(userEmail));
+                      setIsValidEmail(emailRegex.test(event.target.value));
                     }}
                   />
                   <div className="h-5">
