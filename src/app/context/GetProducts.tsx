@@ -4,12 +4,19 @@ export const ProductsContext = createContext(null);
 
 export const ProductsProvider = ({ children }) => {
   const router = useRouter();
-  const isAuth = localStorage.getItem("isAuthenticated");
+  const [isAuth, setIsAuth] = useState<string | null>(null);
   const [productList, setProductList] = useState([]);
   const [cartList, setCartList] = useState([]);
   const [userList, setUserList] = useState([]);
   const [trigger, setTrigger] = useState(0);
   const pathname = usePathname();
+
+  // Initialize isAuth from localStorage on client side only
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setIsAuth(localStorage.getItem("isAuthenticated"));
+    }
+  }, []);
 
   // check authenticated user
   const isAuthenticated = () => {
